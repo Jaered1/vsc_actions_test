@@ -83,13 +83,15 @@ jobs:
 
       - name: Tworzenie zmiennej z wersją jądra systemu operacyjnego
         id: zmienna_jadro
-        run: | 
+        run: |
           JADRO=$(uname -a)
           echo "Jądro w systemie to $JADRO"
+          echo "JADRO<<EOF" >> $GITHUB_OUTPUT
+          echo "$JADRO" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Wyświetl zawartość zmiennej jądro
-        run: |
-          echo "Jądro w systemie to $wersja_jadro"
+        run: echo "Jądro w systemie to $wersja_jadro"
         env:
           wersja_jadro: ${{ steps.zmienna_jadro.outputs.JADRO }}
 
